@@ -7,12 +7,12 @@
   stack: [Python, PostgreSQL]
 
 - slug: vtwin
-  title: V-Twin
+  title: V-twin мания
   url: https://vtwin.musaev.me
   repo:
   status: работает
-  summary: TODO – описать проект.
-  stack: []
+  summary: Справочник по тюнингу двигателей Harley-Davidson, где у каждой цифры указан источник, и браузерный тренажёр dyno-настройки поверх него.
+  stack: [TypeScript, Fastify, PostgreSQL]
 
 - slug: digest-bot
   title: Утренний дайджест
