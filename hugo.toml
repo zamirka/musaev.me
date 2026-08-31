@@ -4,6 +4,8 @@ defaultContentLanguage = "ru"
 title = "Замир Мусаев"
 copyright = "Замир Мусаев"
 enableRobotsTXT = true
+# даты изменения страниц берём из истории git
+enableGitInfo = true
 enableEmoji = true
 timeZone = "Europe/Moscow"
 summaryLength = 30
