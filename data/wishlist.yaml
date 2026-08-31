@@ -1,13 +1,45 @@
 # Вишлист. Формат позиции:
 #   title  – что это (обязательно)
 #   url    – ссылка на магазин или пример (необязательно)
-#   note   – уточнение: размер, цвет, версия (необязательно)
+#   note   – уточнение: модель, размер, цвет (необязательно)
 #   group  – раздел, в который попадёт позиция (необязательно)
 #   taken  – true, когда подарок уже получен; позиция зачёркивается
 #
 # Добавить позицию – дописать блок. Вычеркнуть – поставить taken: true.
 
-- title: TODO – заполнить своими позициями
-  note: Это пример. Удалите его и добавьте то, что вам действительно интересно.
-  group: Разное
-  taken: false
+- title: Кофры Viking Ironclad, 24 л
+  url: https://www.vikingbags.com/products/viking-ironclad-24l-quick-mount-medium-harley-dyna-street-bob-fxdb-painted-saddlebags
+  note: быстросъёмные, окрашенные, под Dyna Street Bob FXDB
+  group: Мотоцикл
+
+- title: Задняя дуга безопасности NICECNC
+  url: https://ali.click/56hmk19
+  note: Harley Dyna Street Bob FXDB, 2006–2017
+  group: Мотоцикл
+
+- title: Защита двигателя, скид-плейт
+  url: https://ali.click/nkhmk14
+  note: бампер и защита картера, Dyna
+  group: Мотоцикл
+
+- title: Задний тормозной диск
+  url: https://ali.click/cchmk1a
+  note: Dyna Street Bob FXDB
+  group: Мотоцикл
+
+- title: Электросамокат Meepo Rover 4×4
+  url: https://ali.click/pwgmk1l
+  note: внедорожный, полный привод
+  group: Электротранспорт
+
+- title: Строительный фен FIT, 2000 Вт
+  url: https://ozon.ru/t/l1Fbt75
+  group: Инструмент и ножи
+
+- title: Очиститель для ножей BLACKWOLF Ultimate Cleaner
+  url: https://ozon.ru/t/GAp8lJ4
+  group: Инструмент и ножи
+
+- title: Смазка для ножей BLACKWOLF Ultimate Lube HARD BLUE
+  url: https://ozon.ru/t/sXOuGGP
+  group: Инструмент и ножи
