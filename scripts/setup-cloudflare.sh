@@ -79,19 +79,24 @@ echo "== DNS =="
 ZONE_ID=$(curl -sS "${H[@]}" "$API/zones?name=$DOMAIN" | jqr "['result'][0]['id']")
 echo "zone id: $ZONE_ID"
 
-echo "-- текущие записи апекса и www --"
-curl -sS "${H[@]}" "$API/zones/$ZONE_ID/dns_records?per_page=100" | python3 -c "
+# Трогаем только адресные записи. На апексе живут MX и TXT (почта и SPF) –
+# удалить их вместе с A-записью значит положить почту домена.
+ADDR_TYPES="A AAAA CNAME"
+
+echo "-- адресные записи апекса и www --"
+curl -sS "${H[@]}" "$API/zones/$ZONE_ID/dns_records?per_page=200" | python3 -c "
 import json,sys
 for r in json.load(sys.stdin)['result']:
-    if r['name'] in ('$DOMAIN','www.$DOMAIN'):
-        print(f\"  {r['type']:6} {r['name']:20} -> {r['content']:35} proxied={r['proxied']} id={r['id']}\")"
+    if r['name'] in ('$DOMAIN','www.$DOMAIN') and r['type'] in '$ADDR_TYPES'.split():
+        print(f\"  {r['type']:6} {r['name']:20} -> {r['content']:35} proxied={r['proxied']}\")"
 
 read -r -p "Удалить эти записи и направить домен на $PROJECT.pages.dev? [y/N] " a
 [[ "$a" == "y" || "$a" == "Y" ]] || { echo "Отменено."; exit 0; }
 
-curl -sS "${H[@]}" "$API/zones/$ZONE_ID/dns_records?per_page=100" | python3 -c "
+curl -sS "${H[@]}" "$API/zones/$ZONE_ID/dns_records?per_page=200" | python3 -c "
 import json,sys
-ids=[r['id'] for r in json.load(sys.stdin)['result'] if r['name'] in ('$DOMAIN','www.$DOMAIN')]
+ids=[r['id'] for r in json.load(sys.stdin)['result']
+     if r['name'] in ('$DOMAIN','www.$DOMAIN') and r['type'] in '$ADDR_TYPES'.split()]
 print('\n'.join(ids))" | while read -r id; do
   [[ -n "$id" ]] && curl -sS "${H[@]}" -X DELETE "$API/zones/$ZONE_ID/dns_records/$id" >/dev/null && echo "  удалена $id"
 done
