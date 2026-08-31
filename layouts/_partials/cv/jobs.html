@@ -1,0 +1,34 @@
+{{- /* Список мест работы. dict "jobs" ... "detail" "short|full" */ -}}
+{{- $detail := .detail | default "full" -}}
+{{- range .jobs }}
+<section class="cv-job">
+  <div class="cv-job-when">{{ partial "cv/period.html" (dict "from" .from "to" .to) }}</div>
+  <div class="cv-job-body">
+    <h3 class="cv-job-role">{{ .role }}</h3>
+    <p class="cv-job-org">
+      {{ .org }}{{ with .project }} · {{ . }}{{ end }}
+      {{- with .site }} · <a href="https://{{ . }}" rel="noopener nofollow">{{ . }}</a>{{ end }}
+    </p>
+
+    {{- if eq $detail "full" }}
+      {{- range .body }}<p>{{ . }}</p>{{ end }}
+    {{- else }}
+      {{- with first 1 .body }}{{ range . }}<p>{{ . }}</p>{{ end }}{{ end }}
+    {{- end }}
+
+    {{- with .products }}
+    <p><strong>Продукты и проекты:</strong></p>
+    <ul>{{ range . }}<li>{{ . }}</li>{{ end }}</ul>
+    {{- end }}
+
+    {{- with .clients }}
+    <p><strong>Клиенты:</strong> {{ delimit . ", " }}.</p>
+    {{- end }}
+
+    {{- with .highlights }}
+    <p><strong>Результаты:</strong></p>
+    <ul>{{ range . }}<li>{{ . }}</li>{{ end }}</ul>
+    {{- end }}
+  </div>
+</section>
+{{- end }}

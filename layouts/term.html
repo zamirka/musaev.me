@@ -1,0 +1,9 @@
+{{ define "main" }}
+<h1>{{ .Title }}</h1>
+<p class="page-meta">Материалы по теме, всего {{ len .RegularPages }}.</p>
+<ul class="entries">
+  {{- range .RegularPages }}
+  {{ partial "entry.html" . }}
+  {{- end }}
+</ul>
+{{ end }}

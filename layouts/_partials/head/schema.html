@@ -1,0 +1,56 @@
+{{- $c := site.Params.contacts -}}
+{{- $sameAs := slice
+    (printf "https://github.com/%s" $c.github)
+    (printf "https://t.me/%s" $c.telegram)
+    (printf "https://career.habr.com/%s" $c.habr) -}}
+
+{{- $person := dict
+    "@type" "Person"
+    "@id" (printf "%s#person" site.BaseURL)
+    "name" site.Params.author
+    "url" site.BaseURL
+    "jobTitle" site.Params.jobTitle
+    "email" (printf "mailto:%s" $c.email)
+    "sameAs" $sameAs -}}
+
+{{- with resources.Get site.Params.photo -}}
+  {{- with .Fill "640x640 Smart" -}}
+    {{- $person = merge $person (dict "image" .Permalink) -}}
+  {{- end -}}
+{{- end -}}
+
+{{- $graph := slice -}}
+
+{{- if or .IsHome (eq .RelPermalink "/about/") -}}
+  {{- $graph = $graph | append $person -}}
+{{- end -}}
+
+{{- if and (eq .Kind "page") (eq .Section "blog") -}}
+  {{- $article := dict
+      "@type" "BlogPosting"
+      "headline" .Title
+      "url" .Permalink
+      "mainEntityOfPage" .Permalink
+      "author" (dict "@type" "Person" "name" site.Params.author "url" site.BaseURL)
+      "publisher" (dict "@type" "Person" "name" site.Params.author "url" site.BaseURL) -}}
+  {{- with .Date }}{{ $article = merge $article (dict "datePublished" (.Format "2006-01-02")) }}{{ end -}}
+  {{- with .Lastmod }}{{ $article = merge $article (dict "dateModified" (.Format "2006-01-02")) }}{{ end -}}
+  {{- with .Description }}{{ $article = merge $article (dict "description" .) }}{{ end -}}
+  {{- with .Params.tags }}{{ $article = merge $article (dict "keywords" (delimit . ", ")) }}{{ end -}}
+  {{- $graph = $graph | append $article -}}
+{{- end -}}
+
+{{- if and (ne .Kind "home") (gt (len .Ancestors) 0) -}}
+  {{- $items := slice -}}
+  {{- $pos := 1 -}}
+  {{- range .Ancestors.Reverse -}}
+    {{- $items = $items | append (dict "@type" "ListItem" "position" $pos "name" (cond .IsHome "Главная" .Title) "item" .Permalink) -}}
+    {{- $pos = add $pos 1 -}}
+  {{- end -}}
+  {{- $items = $items | append (dict "@type" "ListItem" "position" $pos "name" .Title "item" .Permalink) -}}
+  {{- $graph = $graph | append (dict "@type" "BreadcrumbList" "itemListElement" $items) -}}
+{{- end -}}
+
+{{- with $graph }}
+<script type="application/ld+json">{{ (dict "@context" "https://schema.org" "@graph" .) | jsonify }}</script>
+{{- end }}

@@ -1,0 +1,23 @@
+- slug: investing
+  title: Investing
+  url: https://investing.musaev.me
+  repo: zamirka/investing
+  status: работает
+  summary: Личный инструмент для учёта портфеля и анализа инвестиций – считает и показывает ровно то, что нужно мне, а не то, что решил показать брокер.
+  stack: [Python, PostgreSQL]
+
+- slug: vtwin
+  title: V-Twin
+  url: https://vtwin.musaev.me
+  repo:
+  status: работает
+  summary: TODO – описать проект.
+  stack: []
+
+- slug: digest-bot
+  title: Утренний дайджест
+  url: /digest/
+  repo:
+  status: работает
+  summary: Telegram-бот, который раз в сутки собирает почтовые рассылки и веб-источники, суммирует их LLM и присылает мне дайджест. Он же публикует выпуски на этом сайте.
+  stack: [Python, IMAP, LLM]

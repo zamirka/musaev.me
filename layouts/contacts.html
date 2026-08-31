@@ -1,0 +1,14 @@
+{{ define "main" }}
+{{- $c := site.Params.contacts -}}
+<h1>{{ .Title }}</h1>
+{{ .Content }}
+
+<ul class="contact-list">
+  <li><span class="label">Почта</span><span><a href="mailto:{{ $c.email }}">{{ $c.email }}</a></span></li>
+  <li><span class="label">Telegram</span><span><a href="https://t.me/{{ $c.telegram }}">@{{ $c.telegram }}</a></span></li>
+  <li><span class="label">GitHub</span><span><a href="https://github.com/{{ $c.github }}">github.com/{{ $c.github }}</a></span></li>
+  <li><span class="label">Хабр Карьера</span><span><a href="https://career.habr.com/{{ $c.habr }}">career.habr.com/{{ $c.habr }}</a></span></li>
+  <li><span class="label">Резюме</span><span><a href="/cv/">musaev.me/cv</a> · <a href="/cv.pdf">PDF</a></span></li>
+</ul>
+
+{{ end }}

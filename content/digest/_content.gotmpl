@@ -1,0 +1,17 @@
+{{- /*
+  Content adapter: страницы дайджеста строятся из data/digests/*.json,
+  которые кладёт бот. Руками здесь ничего создавать не надо.
+*/ -}}
+{{- range $name, $d := hugo.Data.digests }}
+  {{- $date := $d.date | default $name -}}
+  {{- $desc := $d.announce | default (printf "Дайджест за %s: %d материалов." $date (int ($d.stats.total | default 0))) -}}
+  {{- $.AddPage (dict
+      "path" $date
+      "slug" $date
+      "title" ($d.title | default (printf "Дайджест за %s" $date))
+      "dates" (dict "date" (time.AsTime (printf "%sT09:00:00+03:00" $date)))
+      "description" ($desc | plainify | truncate 180)
+      "kind" "page"
+      "params" (dict "digest" $d)
+  ) }}
+{{- end }}

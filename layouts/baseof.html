@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="{{ or site.Language.Locale "ru" }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  {{ partial "head/seo.html" . }}
+  {{ partial "head/fonts.html" . }}
+  {{ partial "head/styles.html" . }}
+  {{ partial "head/analytics.html" . }}
+  {{ partial "head/theme.html" . }}
+</head>
+<body>
+  <a class="skip-link" href="#main">К содержанию</a>
+  <div class="wrap">
+    {{ partial "header.html" . }}
+    <main id="main">
+      {{ block "main" . }}{{ end }}
+    </main>
+    {{ partial "footer.html" . }}
+  </div>
+</body>
+</html>

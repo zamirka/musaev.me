@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /cv/print/
+
+Sitemap: {{ "sitemap.xml" | absURL }}

@@ -1,0 +1,10 @@
+{{- /* Строка списка материалов: дата, заголовок, описание.
+       Три отдельные ячейки – чтобы в широкой колонке они вставали в ряд. */ -}}
+<li class="entry">
+  <span class="entry-date"><time datetime="{{ .Date.Format "2006-01-02" }}">{{ time.Format "2 Jan 2006" .Date }}</time></span>
+  <span class="entry-title">
+    <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+    {{- if eq .Section "digest" }} <span class="digest-score">дайджест</span>{{ end }}
+  </span>
+  <p class="entry-summary">{{ with .Description }}{{ . }}{{ end }}</p>
+</li>

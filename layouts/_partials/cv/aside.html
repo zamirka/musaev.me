@@ -1,0 +1,17 @@
+{{- $cv := hugo.Data.cv -}}
+<h2>Навыки</h2>
+<ul class="skill-list">{{ range $cv.skills }}<li>{{ . }}</li>{{ end }}</ul>
+
+<h2>Образование</h2>
+<ul class="cv-simple">
+  {{- range $cv.education }}
+  <li><span class="when">{{ .year }}</span><span class="what"><strong>{{ .org }}</strong><br><span>{{ .what }}</span></span></li>
+  {{- end }}
+</ul>
+
+<h2>Языки</h2>
+<ul class="cv-simple">
+  {{- range $cv.languages }}
+  <li><span class="when">{{ .lang }}</span><span class="what"><span>{{ .level }}</span></span></li>
+  {{- end }}
+</ul>

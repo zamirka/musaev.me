@@ -1,0 +1,13 @@
+{{- $cv := hugo.Data.cv -}}
+{{- $c := site.Params.contacts -}}
+<header class="cv-header">
+  <h1>{{ $cv.name }}</h1>
+  <p class="cv-headline">{{ $cv.headline }} · {{ $cv.location }}</p>
+  <p>{{ $cv.summary }}</p>
+  <p class="page-meta">
+    <a href="mailto:{{ $c.email }}">{{ $c.email }}</a> ·
+    <a href="https://t.me/{{ $c.telegram }}">t.me/{{ $c.telegram }}</a> ·
+    <a href="https://github.com/{{ $c.github }}">github.com/{{ $c.github }}</a> ·
+    <a href="https://career.habr.com/{{ $c.habr }}">career.habr.com/{{ $c.habr }}</a>
+  </p>
+</header>

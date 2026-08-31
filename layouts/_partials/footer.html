@@ -1,0 +1,9 @@
+{{- $c := site.Params.contacts -}}
+<footer class="site-footer">
+  <span>© {{ now.Year }} {{ site.Params.author }}</span>
+  <a href="mailto:{{ $c.email }}">{{ $c.email }}</a>
+  <a href="https://t.me/{{ $c.telegram }}" rel="me">Telegram</a>
+  <a href="https://github.com/{{ $c.github }}" rel="me">GitHub</a>
+  <span class="spacer"></span>
+  <a href="/index.xml">RSS</a>
+</footer>

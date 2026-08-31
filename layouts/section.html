@@ -1,0 +1,14 @@
+{{ define "main" }}
+<h1>{{ .Title }}</h1>
+{{ .Content }}
+{{- $pages := .RegularPages }}
+{{- if $pages }}
+<ul class="entries">
+  {{- range $pages }}
+  {{ partial "entry.html" . }}
+  {{- end }}
+</ul>
+{{- else }}
+<p class="page-meta">Пока пусто.</p>
+{{- end }}
+{{ end }}

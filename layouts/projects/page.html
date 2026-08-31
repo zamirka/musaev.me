@@ -1,0 +1,15 @@
+{{ define "main" }}
+{{- $slug := path.BaseName .File.TranslationBaseName -}}
+{{- $p := index (where hugo.Data.projects "slug" $slug) 0 | default dict -}}
+<article>
+  <h1>{{ .Title }}</h1>
+  <p class="page-meta">
+    {{- with $p.url }}<a href="{{ . }}">{{ replaceRE "^https?://" "" . }}</a>{{ end }}
+    {{- with $p.repo }} · <a href="https://github.com/{{ . }}">github.com/{{ . }}</a>{{ end }}
+    {{- with $p.stack }} · {{ delimit . " · " }}{{ end }}
+    {{- with $p.status }} · {{ . }}{{ end }}
+  </p>
+  {{- with $p.summary }}<p>{{ . }}</p>{{ end }}
+  {{ .Content }}
+</article>
+{{ end }}

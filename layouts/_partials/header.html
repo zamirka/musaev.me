@@ -1,0 +1,34 @@
+<header class="site-header">
+  <a class="site-title" href="/">{{ site.Params.author }}</a>
+  <nav class="site-nav" aria-label="Основная навигация">
+    {{- range site.Menus.main }}
+    <a href="{{ .URL }}"{{ if $.IsMenuCurrent "main" . }} aria-current="page"{{ else if $.HasMenuCurrent "main" . }} aria-current="true"{{ end }}>{{ .Name }}</a>
+    {{- end }}
+  </nav>
+  <button class="theme-toggle" type="button" data-theme-toggle
+          aria-label="Тема оформления" title="Тема: как в системе">◐</button>
+</header>
+<script>
+(function () {
+  var b = document.querySelector('[data-theme-toggle]');
+  if (!b) return;
+  var order = ['auto', 'light', 'dark'];
+  var icon = { auto: '\u25D0', light: '\u25CB', dark: '\u25CF' };
+  var name = { auto: 'как в системе', light: 'светлая', dark: 'тёмная' };
+  function read() {
+    try { return localStorage.getItem('theme') || 'auto'; } catch (e) { return 'auto'; }
+  }
+  function paint(v) {
+    if (v === 'auto') delete document.documentElement.dataset.theme;
+    else document.documentElement.dataset.theme = v;
+    b.textContent = icon[v];
+    b.title = 'Тема: ' + name[v];
+  }
+  paint(read());
+  b.addEventListener('click', function () {
+    var next = order[(order.indexOf(read()) + 1) % order.length];
+    try { localStorage.setItem('theme', next); } catch (e) {}
+    paint(next);
+  });
+})();
+</script>

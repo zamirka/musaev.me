@@ -1,0 +1,47 @@
+{{ define "main" }}
+{{- $items := hugo.Data.wishlist -}}
+<h1>{{ .Title }}</h1>
+{{ .Content }}
+
+{{- $free := where $items "taken" "!=" true -}}
+{{- $taken := where $items "taken" true -}}
+
+{{- /* Раздел у позиции необязателен, поэтому нормализуем его перед группировкой. */ -}}
+{{- $norm := slice -}}
+{{- range $free }}{{ $norm = $norm | append (merge (dict "group" "") .) }}{{ end -}}
+{{- $groups := slice -}}
+{{- range $norm }}{{ $groups = $groups | append .group }}{{ end -}}
+
+{{- range $group := ($groups | uniq) }}
+  {{- $rows := where $norm "group" $group }}
+  {{- with $group }}<h2>{{ . }}</h2>{{ end }}
+  <ul class="wish-list">
+    {{- range $rows }}
+    <li class="wish">
+      <span class="wish-title">
+        {{- if .url }}<a href="{{ .url }}" rel="noopener nofollow">{{ .title }}</a>
+        {{- else }}{{ .title }}{{ end -}}
+      </span>
+      {{- with .note }}<span class="wish-note">{{ . }}</span>{{ end }}
+    </li>
+    {{- end }}
+  </ul>
+{{- end }}
+
+{{- with $taken }}
+<h2>Уже подарено</h2>
+<ul class="wish-list wish-done">
+  {{- range . }}
+  <li class="wish">
+    <span class="wish-title"><s>{{ .title }}</s></span>
+    <span class="wish-note">спасибо</span>
+  </li>
+  {{- end }}
+</ul>
+{{- end }}
+
+<p class="page-meta">Выбрали что-то – напишите мне в
+<a href="https://t.me/{{ site.Params.contacts.telegram }}">Telegram</a>
+или на <a href="mailto:{{ site.Params.contacts.email }}">{{ site.Params.contacts.email }}</a>,
+чтобы я вычеркнул позицию и двое не подарили одно и то же.</p>
+{{ end }}

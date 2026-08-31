@@ -1,0 +1,18 @@
+{{- /* Период работы: "Апрель 2017 – настоящее время · 9 лет 5 месяцев" */ -}}
+{{- $names := slice "" "Январь" "Февраль" "Март" "Апрель" "Май" "Июнь" "Июль" "Август" "Сентябрь" "Октябрь" "Ноябрь" "Декабрь" -}}
+{{- $from := time.AsTime (printf "%s-01T00:00:00Z" (string .from)) -}}
+{{- $open := not .to -}}
+{{- $to := now -}}
+{{- if not $open }}{{ $to = time.AsTime (printf "%s-01T00:00:00Z" (string .to)) }}{{ end -}}
+{{- $fy := $from.Year -}}{{- $fm := int ($from.Format "1") -}}
+{{- $ty := $to.Year -}}{{- $tm := int ($to.Format "1") -}}
+{{- $total := add (mul 12 (sub $ty $fy)) (sub $tm $fm) -}}
+{{- $years := div $total 12 -}}
+{{- $rest := mod $total 12 -}}
+<span class="cv-period">{{ index $names $fm }} {{ $fy }} –
+{{- if $open }} настоящее время{{ else }} {{ index $names $tm | lower }} {{ $ty }}{{ end }}</span><br>
+<span class="cv-duration">
+{{- if gt $years 0 }}{{ $years }}&nbsp;{{ partial "plural.html" (dict "n" $years "forms" (slice "год" "года" "лет")) }}{{ end }}
+{{- if gt $rest 0 }} {{ $rest }}&nbsp;{{ partial "plural.html" (dict "n" $rest "forms" (slice "месяц" "месяца" "месяцев")) }}{{ end }}
+{{- if and (eq $years 0) (eq $rest 0) }}меньше месяца{{ end -}}
+</span>

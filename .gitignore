@@ -1,0 +1,15 @@
+# сборка
+public/
+resources/
+node_modules/
+.hugo_build.lock
+
+# исходники, которые не нужны для сборки и не должны быть публичными:
+# в PDF резюме есть телефон, в img/ лежат оригиналы фотографий
+/docs/
+/img/
+
+# служебное
+/.design-backup/
+.playwright-mcp/
+.DS_Store

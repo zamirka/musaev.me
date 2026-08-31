@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <title>{{ hugo.Data.cv.name }} – {{ hugo.Data.cv.headline }}</title>
+  <meta name="robots" content="noindex, nofollow">
+  {{ partial "head/fonts.html" . }}
+  {{ partial "head/styles.html" . }}
+  {{ partial "cv/print-css.html" . }}
+</head>
+<body>
+<div class="wrap">
+  {{- $cv := hugo.Data.cv -}}
+  {{ partial "cv/header.html" . }}
+  <h2>Опыт работы</h2>
+  {{ partial "cv/jobs.html" (dict "jobs" $cv.positions "detail" "full") }}
+  {{ partial "cv/aside.html" . }}
+
+  <h2>Повышение квалификации</h2>
+  <ul class="cv-simple">
+    {{- range $cv.courses }}
+    <li><span class="when">{{ .year }}</span><span class="what"><strong>{{ .title }}</strong><br><span>{{ .org }}</span></span></li>
+    {{- end }}
+  </ul>
+
+  <h2>Сертификаты и экзамены</h2>
+  <ul class="cv-simple">
+    {{- range $cv.certifications }}
+    <li><span class="when">{{ .year }}</span><span class="what"><strong>{{ .title }}</strong><br><span>{{ .org }}</span></span></li>
+    {{- end }}
+  </ul>
+
+  <h2>О себе</h2>
+  {{ range $cv.about }}<p>{{ . }}</p>{{ end }}
+</div>
+</body>
+</html>

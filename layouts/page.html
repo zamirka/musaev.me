@@ -1,0 +1,13 @@
+{{ define "main" }}
+<article>
+  <h1>{{ .Title }}</h1>
+  {{- if or (eq .Section "blog") .Params.tags }}
+  <p class="page-meta">
+    {{- with .Date }}<time datetime="{{ .Format "2006-01-02" }}">{{ time.Format "2 January 2006" . }}</time>{{ end }}
+    {{- with .ReadingTime }} · {{ . }} мин чтения{{ end }}
+    {{- with .Params.tags }} · <span class="tags">{{ range . }}<a class="tag" href="/tags/{{ . | urlize }}/">{{ . }}</a>{{ end }}</span>{{ end }}
+  </p>
+  {{- end }}
+  {{ .Content }}
+</article>
+{{ end }}

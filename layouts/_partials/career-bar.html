@@ -1,0 +1,81 @@
+{{- /*
+  Опыт работы на общей оси времени: строка на организацию.
+  Строки независимы, поэтому пересекающиеся периоды (в ранние годы работа,
+  преподавание и учёба шли одновременно) видны сами собой, без упаковки по дорожкам.
+*/ -}}
+{{- $now := now -}}
+{{- $nowM := add (mul $now.Year 12) (int ($now.Format "1")) -}}
+
+{{- $segs := slice -}}
+{{- range hugo.Data.cv.positions -}}
+  {{- $f := time.AsTime (printf "%s-01T00:00:00Z" (string .from)) -}}
+  {{- $s := add (mul $f.Year 12) (int ($f.Format "1")) -}}
+  {{- $e := $nowM -}}
+  {{- $ty := 0 -}}
+  {{- if .to -}}
+    {{- $t := time.AsTime (printf "%s-01T00:00:00Z" (string .to)) -}}
+    {{- $e = add (mul $t.Year 12) (int ($t.Format "1")) -}}
+    {{- $ty = $t.Year -}}
+  {{- end -}}
+  {{- $segs = $segs | append (dict "label" (.short | default .org) "org" .org "role" .role
+      "s" $s "e" $e "now" (not .to) "y0" $f.Year "y1" $ty) -}}
+{{- end -}}
+{{- $segs = sort $segs "s" -}}
+
+{{- /* Периоды в одной организации сводим в одну строку. */ -}}
+{{- $rows := slice -}}
+{{- range $seg := $segs -}}
+  {{- $found := false -}}
+  {{- $next := slice -}}
+  {{- range $r := $rows -}}
+    {{- if eq $r.org $seg.org -}}
+      {{- $found = true -}}
+      {{- $next = $next | append (merge $r (dict
+          "s" (cond (lt $seg.s $r.s) $seg.s $r.s)
+          "e" (cond (gt $seg.e $r.e) $seg.e $r.e)
+          "y0" (cond (lt $seg.y0 $r.y0) $seg.y0 $r.y0)
+          "y1" (cond (gt $seg.y1 $r.y1) $seg.y1 $r.y1)
+          "now" (or $r.now $seg.now))) -}}
+    {{- else -}}
+      {{- $next = $next | append $r -}}
+    {{- end -}}
+  {{- end -}}
+  {{- $rows = cond $found $next ($rows | append $seg) -}}
+{{- end -}}
+
+{{- $min := (index $segs 0).s -}}
+{{- $span := sub $nowM $min -}}
+{{- $startYear := (index $segs 0).y0 -}}
+{{- $rows = sort $rows "e" "desc" -}}
+
+<figure class="career" aria-label="Опыт работы с {{ $startYear }} года">
+  <ol class="career-rows">
+    {{- range $i, $r := $rows -}}
+      {{- $left := div (mul (sub $r.s $min) 100.0) $span -}}
+      {{- $w := div (mul (sub $r.e $r.s) 100.0) $span -}}
+      <li class="career-row{{ if $r.now }} is-now{{ end }}">
+        <span class="career-org">{{ $r.label }}</span>
+        <span class="career-track">
+          <span class="career-bar" style="left:{{ printf "%.2f" $left }}%;width:{{ printf "%.2f" $w }}%;animation-delay:{{ printf "%.0f" (mul $i 40.0) }}ms"></span>
+        </span>
+        <span class="career-years">{{ $r.y0 }}&thinsp;–&thinsp;{{ if $r.now }}сейчас{{ else }}{{ $r.y1 }}{{ end }}</span>
+      </li>
+    {{- end -}}
+  </ol>
+  <div class="career-axis" aria-hidden="true">
+    <span class="career-axis-line">
+      {{- range $y := (seq $startYear 3 $now.Year) }}
+        {{- $m := sub (add (mul $y 12) 1) $min -}}
+        <span class="career-tick" style="left:{{ printf "%.2f" (div (mul $m 100.0) $span) }}%">{{ $y }}</span>
+      {{- end }}
+    </span>
+  </div>
+  {{- $orgs := slice -}}
+  {{- range $rows }}{{ $orgs = $orgs | append .org }}{{ end -}}
+  {{- $months := sub $nowM $min -}}
+  <figcaption class="career-total">
+    {{ len $orgs }}&nbsp;{{ partial "plural.html" (dict "n" (len $orgs) "forms" (slice "организация" "организации" "организаций")) }}
+    · {{ div $months 12 }}&nbsp;{{ partial "plural.html" (dict "n" (div $months 12) "forms" (slice "год" "года" "лет")) }}
+    {{ with mod $months 12 }}{{ . }}&nbsp;{{ partial "plural.html" (dict "n" . "forms" (slice "месяц" "месяца" "месяцев")) }}{{ end }}
+  </figcaption>
+</figure>

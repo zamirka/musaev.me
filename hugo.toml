@@ -1,0 +1,109 @@
+baseURL = "https://musaev.me/"
+locale = "ru-RU"
+defaultContentLanguage = "ru"
+title = "Замир Мусаев"
+copyright = "Замир Мусаев"
+enableRobotsTXT = true
+enableEmoji = true
+timeZone = "Europe/Moscow"
+summaryLength = 30
+
+[pagination]
+  pagerSize = 20
+
+[permalinks.page]
+  blog = "/blog/:contentbasename/"
+  projects = "/projects/:contentbasename/"
+  digest = "/digest/:contentbasename/"
+
+[taxonomies]
+  tag = "tags"
+
+[outputs]
+  home = ["html", "rss"]
+  section = ["html", "rss"]
+
+[markup.goldmark.renderer]
+  unsafe = true
+
+[markup.tableOfContents]
+  startLevel = 2
+  endLevel = 3
+
+[markup.highlight]
+  noClasses = false
+  style = "github"
+
+[minify]
+  disableXML = true
+
+[security.funcs]
+  getenv = ['^HUGO_', '^GITHUB_TOKEN$', '^CI$']
+
+[imaging]
+  quality = 82
+  resampleFilter = "Lanczos"
+
+[[menu.main]]
+  name = "Обо мне"
+  pageRef = "/about"
+  weight = 10
+
+[[menu.main]]
+  name = "Резюме"
+  pageRef = "/cv"
+  weight = 20
+
+[[menu.main]]
+  name = "Проекты"
+  pageRef = "/projects"
+  weight = 30
+
+[[menu.main]]
+  name = "Блог"
+  pageRef = "/blog"
+  weight = 40
+
+[[menu.main]]
+  name = "Дайджест"
+  pageRef = "/digest"
+  weight = 50
+
+[[menu.main]]
+  name = "Вишлист"
+  pageRef = "/wishlist"
+  weight = 55
+
+[[menu.main]]
+  name = "Контакты"
+  pageRef = "/contacts"
+  weight = 60
+
+[params]
+  author = "Замир Мусаев"
+  jobTitle = "Head of Digital Product Development"
+  description = "Замир Мусаев – руководитель разработки и цифровых продуктов. Резюме, личные проекты, заметки об IT, финансах, спорте и двухколёсном транспорте."
+  photo = "img/zamir.jpg"
+  locale = "ru_RU"
+  githubUser = "zamirka"
+
+  [params.contacts]
+    email = "z@musaev.me"
+    telegram = "zamirmusaev"
+    github = "zamirka"
+    habr = "zamirmusaev"
+
+  [params.digest]
+    # Отдельные выпуски – пересказы чужих материалов, в поисковый индекс им не надо.
+    noindex = true
+
+  [params.analytics]
+    # Заполняется на этапе публикации. Пока пусто – счётчики не рендерятся.
+    cloudflareToken = ""
+    metrikaId = ""
+    umamiUrl = ""
+    umamiWebsiteId = ""
+
+  [params.verification]
+    google = ""
+    yandex = ""

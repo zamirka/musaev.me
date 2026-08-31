@@ -1,0 +1,9 @@
+{{- /* Русские склонения. dict "n" 5 "forms" (slice "год" "года" "лет") */ -}}
+{{- $n := .n -}}
+{{- $f := .forms -}}
+{{- $mod100 := mod $n 100 -}}
+{{- $mod10 := mod $n 10 -}}
+{{- if and (ge $mod100 11) (le $mod100 14) -}}{{ index $f 2 }}
+{{- else if eq $mod10 1 -}}{{ index $f 0 }}
+{{- else if and (ge $mod10 2) (le $mod10 4) -}}{{ index $f 1 }}
+{{- else -}}{{ index $f 2 }}{{ end -}}

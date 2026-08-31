@@ -1,0 +1,36 @@
+{{- /*
+  Данные GitHub тянутся на сборке и вшиваются в HTML: у посетителя ноль внешних запросов.
+  Если API недоступен или упёрлись в лимит – берём снимок из data/github_fallback.json,
+  сборка из-за чужого сервиса падать не должна.
+  Возвращает slice репозиториев.
+*/ -}}
+{{- $user := site.Params.githubUser -}}
+{{- $url := printf "https://api.github.com/users/%s/repos?per_page=100&sort=updated" $user -}}
+{{- $opts := dict "headers" (dict "Accept" "application/vnd.github+json" "User-Agent" "musaev.me-build") -}}
+{{- with getenv "GITHUB_TOKEN" -}}
+  {{- $opts = merge $opts (dict "headers" (dict "Authorization" (printf "Bearer %s" .))) -}}
+{{- end -}}
+
+{{- $repos := slice -}}
+{{- $ok := false -}}
+{{- with try (resources.GetRemote $url $opts) -}}
+  {{- with .Err -}}
+    {{- warnf "GitHub API недоступен (%s), беру data/github_fallback.json" . -}}
+  {{- else with .Value -}}
+    {{- if eq .MediaType.SubType "json" -}}
+      {{- $repos = .Content | transform.Unmarshal -}}
+      {{- $ok = true -}}
+    {{- else -}}
+      {{- warnf "GitHub API вернул не JSON, беру data/github_fallback.json" -}}
+    {{- end -}}
+  {{- else -}}
+    {{- warnf "GitHub API вернул пустой ответ, беру data/github_fallback.json" -}}
+  {{- end -}}
+{{- end -}}
+
+{{- if not $ok -}}
+  {{- with hugo.Data.github_fallback -}}{{ $repos = . }}{{ end -}}
+{{- end -}}
+
+{{- $repos = where (where $repos "fork" false) "archived" false -}}
+{{- return (sort $repos "pushed_at" "desc") -}}

@@ -1,0 +1,8 @@
+{{ define "main" }}
+<h1>{{ .Title }}</h1>
+<ul class="skill-list">
+  {{- range .Data.Terms.Alphabetical }}
+  <li><a href="{{ .Page.RelPermalink }}">{{ .Page.Title }} <span class="digest-score">{{ .Count }}</span></a></li>
+  {{- end }}
+</ul>
+{{ end }}

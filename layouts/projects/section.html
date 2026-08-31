@@ -1,0 +1,24 @@
+{{ define "main" }}
+<h1>{{ .Title }}</h1>
+{{ .Content }}
+{{ partial "project-cards.html" (dict "ctx" .) }}
+
+{{- $repos := partial "github.html" . }}
+{{- with first 9 $repos }}
+<h2>Ещё на GitHub</h2>
+<p class="page-meta">Список подтягивается с <a href="https://github.com/{{ site.Params.githubUser }}">github.com/{{ site.Params.githubUser }}</a> при сборке сайта.</p>
+<ul class="cards">
+  {{- range . }}
+  <li class="card">
+    <h3><a href="{{ .html_url }}" rel="noopener">{{ .name }}</a></h3>
+    {{- with .description }}<p>{{ . }}</p>{{ end }}
+    <div class="card-meta">
+      {{- with .language }}<span>{{ . }}</span>{{ end }}
+      {{- if gt .stargazers_count 0 }}<span>★ {{ .stargazers_count }}</span>{{ end }}
+      <span>{{ time.Format "02.01.2006" .pushed_at }}</span>
+    </div>
+  </li>
+  {{- end }}
+</ul>
+{{- end }}
+{{ end }}

@@ -1,0 +1,67 @@
+{{ define "main" }}
+{{- $d := .Params.digest -}}
+<article>
+  <h1>{{ .Title }}</h1>
+  <p class="page-meta">
+    <time datetime="{{ .Date.Format "2006-01-02" }}">{{ time.Format "2 January 2006" .Date }}</time>
+    {{- with $d.stats }} · <span class="digest-stats">материалов: {{ .total }}{{ with .emails }}, из рассылок: {{ . }}{{ end }}{{ with .web }}, с сайтов: {{ . }}{{ end }}</span>{{ end }}
+  </p>
+
+  {{- with $d.announce }}<p>{{ . }}</p>{{ end }}
+
+  {{- with $d.top }}
+  <h2>Главное</h2>
+  <ul>{{ range . }}<li>{{ . }}</li>{{ end }}</ul>
+  {{- end }}
+
+  {{- with $d.items }}
+  <h2>Подробно</h2>
+  {{- range . }}
+  <section class="digest-item">
+    <h3>{{ .title }}</h3>
+    <p class="digest-score">
+      {{- with .category }}{{ . }}{{ end }}
+      {{- with .source }} · {{ . }}{{ end }}
+      {{- with .score }} · {{ . }}/10{{ end }}
+    </p>
+    {{- if .blocks }}
+      {{- /* Картинка стоит там, где её поставила модель – рядом с мыслью,
+             которую она поясняет. Загружаем лениво и без реферера. */ -}}
+      {{- range .blocks }}
+        {{- if eq .type "image" }}
+    <figure class="digest-figure">
+      <img src="{{ .url }}" alt="{{ .alt | default "Иллюстрация из материала" }}"
+           loading="lazy" decoding="async" referrerpolicy="no-referrer">
+    </figure>
+        {{- else }}<p>{{ .text }}</p>{{ end }}
+      {{- end }}
+    {{- else }}
+      {{- with .summary }}<p>{{ . }}</p>{{ end }}
+    {{- end }}
+    {{- with .takeaways }}
+    <p><strong>Выводы автора:</strong></p>
+    <ul>{{ range . }}<li>{{ . }}</li>{{ end }}</ul>
+    {{- end }}
+    {{- with .quote }}<blockquote class="digest-quote">{{ . }}</blockquote>{{ end }}
+    {{- with .links }}
+    <p class="digest-links">Оригиналы:
+      {{- range $i, $l := . }}{{ if $i }} · {{ end }}<a href="{{ $l.url }}" rel="noopener nofollow">{{ $l.title | default $l.url }}</a>{{ end }}
+    </p>
+    {{- end }}
+  </section>
+  {{- end }}
+  {{- end }}
+
+  {{- with $d.short }}
+  <h2>Коротко</h2>
+  {{- range . }}
+  <h3>{{ .category }}</h3>
+  <ul class="digest-short">
+    {{- range .items }}
+    <li>{{ if .url }}<a href="{{ .url }}" rel="noopener nofollow">{{ .title }}</a>{{ else }}{{ .title }}{{ end }}{{ with .summary }} – {{ . }}{{ end }}</li>
+    {{- end }}
+  </ul>
+  {{- end }}
+  {{- end }}
+</article>
+{{ end }}

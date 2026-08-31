@@ -1,0 +1,14 @@
+{{- $items := hugo.Data.projects -}}
+{{- with .limit }}{{ $items = first . $items }}{{ end }}
+<ul class="cards">
+  {{- range $items }}
+  <li class="card">
+    <h3><a href="/projects/{{ .slug }}/">{{ .title }}</a></h3>
+    <p>{{ .summary }}</p>
+    <div class="card-meta">
+      {{- with .stack }}<span>{{ delimit . " · " }}</span>{{ end }}
+      {{- with .status }}<span>{{ . }}</span>{{ end }}
+    </div>
+  </li>
+  {{- end }}
+</ul>

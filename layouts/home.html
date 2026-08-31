@@ -1,0 +1,54 @@
+{{ define "main" }}
+{{- $cv := hugo.Data.cv -}}
+<header class="hero">
+  <div class="hero-text">
+    <p class="eyebrow">{{ $cv.location }} · в IT с {{ $cv.experience_since }}</p>
+    <h1>{{ site.Params.author }}</h1>
+    <p class="hero-role">{{ site.Params.jobTitle }}</p>
+    {{ .Content }}
+  </div>
+  {{- with resources.Get site.Params.photo }}
+  {{- $sm := (.Filter (images.Process "crop 1900x2375 smart")).Fill "300x375" }}
+  {{- $lg := (.Filter (images.Process "crop 1900x2375 smart")).Fill "600x750" }}
+  <figure class="portrait">
+    <img src="{{ $sm.RelPermalink }}" srcset="{{ $sm.RelPermalink }} 1x, {{ $lg.RelPermalink }} 2x"
+         width="150" height="188" alt="{{ site.Params.author }}" loading="eager" decoding="async">
+    <figcaption class="meta">{{ site.Params.author }}, {{ $cv.location }}</figcaption>
+  </figure>
+  {{- end }}
+</header>
+
+{{ partial "career-bar.html" . }}
+
+{{- with first 4 (where site.RegularPages "Section" "blog") }}
+<section class="block">
+  <h2><span class="eyebrow">Написано человеком</span>Заметки</h2>
+  <ul class="entries">
+    {{- range . }}{{ partial "entry.html" . }}{{ end }}
+  </ul>
+  <p class="more"><a href="/blog/">Все заметки</a></p>
+</section>
+{{- end }}
+
+{{- /* Дайджест выходит ежедневно, поэтому на главной – только последний выпуск,
+       иначе он вытеснит собой всё остальное. */ -}}
+{{- with first 1 (where site.RegularPages "Section" "digest") }}
+{{- range . }}
+<section class="block">
+  <h2><span class="eyebrow">Собрано машиной</span>Дайджест</h2>
+  <p>Каждый день <a href="/projects/digest-bot/">мой бот</a> забирает новые письма из рассылок
+  и статьи с сайтов без RSS, пересказывает их и собирает выпуск.</p>
+  <p class="more"><a href="{{ .RelPermalink }}">Последний – за {{ time.Format "2 January 2006" .Date }}</a>
+  · <a href="/digest/">весь архив</a></p>
+</section>
+{{- end }}
+{{- end }}
+
+{{- with site.GetPage "/projects" }}
+<section class="block">
+  <h2>Проекты</h2>
+  {{ partial "project-cards.html" (dict "ctx" . "limit" 3) }}
+  <p class="more"><a href="{{ .RelPermalink }}">Все проекты</a></p>
+</section>
+{{- end }}
+{{ end }}

@@ -1,0 +1,31 @@
+{{ define "main" }}
+{{- $cv := hugo.Data.cv -}}
+{{ partial "cv/header.html" . }}
+
+<div class="cv-actions">
+  <a class="btn" href="/cv.pdf">Скачать PDF</a>
+  <a class="btn" href="/cv/full/">Полная версия</a>
+  <a class="btn" href="mailto:{{ site.Params.contacts.email }}">Написать</a>
+</div>
+
+{{ .Content }}
+
+<h2>Опыт работы</h2>
+{{ partial "career-bar.html" . }}
+{{ partial "cv/jobs.html" (dict "jobs" (where $cv.positions "featured" true) "detail" "full") }}
+
+{{- $rest := where $cv.positions "featured" false }}
+{{- with $rest }}
+<section class="cv-job">
+  <div class="cv-job-when"></div>
+  <div class="cv-job-body">
+    <p class="page-meta" style="margin:0">
+      Ранее: {{ range $i, $p := . }}{{ if $i }}, {{ end }}{{ $p.org }} ({{ (time.AsTime (printf "%s-01T00:00:00Z" $p.from)).Year }}){{ end }}.
+      Подробности – в <a href="/cv/full/">полной версии</a>.
+    </p>
+  </div>
+</section>
+{{- end }}
+
+{{ partial "cv/aside.html" . }}
+{{ end }}

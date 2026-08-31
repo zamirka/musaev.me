@@ -1,0 +1,33 @@
+{{ define "main" }}
+{{- $cv := hugo.Data.cv -}}
+{{ partial "cv/header.html" . }}
+
+<div class="cv-actions">
+  <a class="btn" href="/cv.pdf">Скачать PDF</a>
+  <a class="btn" href="/cv/">Краткая версия</a>
+</div>
+
+<h2>Опыт работы</h2>
+<p class="page-meta">Всего {{ $cv.experience_since }} – настоящее время. {{ $cv.format | humanize }}. {{ $cv.relocation | humanize }}.</p>
+{{ partial "cv/jobs.html" (dict "jobs" $cv.positions "detail" "full") }}
+
+{{ partial "cv/aside.html" . }}
+
+<h2>Повышение квалификации</h2>
+<ul class="cv-simple">
+  {{- range $cv.courses }}
+  <li><span class="when">{{ .year }}</span><span class="what"><strong>{{ .title }}</strong><br><span>{{ .org }}</span></span></li>
+  {{- end }}
+</ul>
+
+<h2>Сертификаты и экзамены</h2>
+<ul class="cv-simple">
+  {{- range $cv.certifications }}
+  <li><span class="when">{{ .year }}</span><span class="what"><strong>{{ .title }}</strong><br><span>{{ .org }}</span></span></li>
+  {{- end }}
+</ul>
+
+<h2>О себе</h2>
+{{ range $cv.about }}<p>{{ . }}</p>{{ end }}
+<p>Своими личными качествами считаю {{ delimit $cv.qualities ", " " и " }}.</p>
+{{ end }}
