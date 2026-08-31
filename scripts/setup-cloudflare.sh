@@ -24,8 +24,15 @@ jqr() { python3 -c "import json,sys;d=json.load(sys.stdin);print(eval('d$1'))" 2
 ok()  { python3 -c "import json,sys;print('да' if json.load(sys.stdin).get('success') else 'нет')"; }
 
 echo "== токен =="
-curl -sS "${H[@]}" "$API/user/tokens/verify" \
-  | python3 -c "import json,sys;d=json.load(sys.stdin);print('статус:', d.get('result',{}).get('status','ошибка'))"
+# Проверяем не через /user/tokens/verify: account-owned токены (префикс cfat_)
+# эту пользовательскую ручку не проходят, хотя сами полностью рабочие.
+curl -sS -o /tmp/cf-check.json -w 'доступ к аккаунтам: HTTP %{http_code}\n' "${H[@]}" "$API/accounts"
+python3 -c "
+import json,sys
+d=json.load(open('/tmp/cf-check.json'))
+if not d.get('success'):
+    print('Токен не принят:', d.get('errors')); sys.exit(1)
+" || exit 1
 
 echo "== аккаунт =="
 ACCOUNTS=$(curl -sS "${H[@]}" "$API/accounts")
