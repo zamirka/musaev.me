@@ -4,7 +4,12 @@
   <h1>{{ .Title }}</h1>
   <p class="page-meta">
     <time datetime="{{ .Date.Format "2006-01-02" }}">{{ time.Format "2 January 2006" .Date }}</time>
-    {{- with $d.stats }} · <span class="digest-stats">материалов: {{ .total }}{{ with .emails }}, из рассылок: {{ . }}{{ end }}{{ with .web }}, с сайтов: {{ . }}{{ end }}</span>{{ end }}
+    {{- /* Материалы и источники – разные единицы: раньше «материалов: 33,
+           из рассылок: 8, с сайтов: 4» читалось так, будто 8 и 4 – тоже
+           материалы, и сумма не сходилась. */ -}}
+    {{- with $d.stats }} · <span class="digest-stats">{{ .total }}&nbsp;{{ partial "plural.html" (dict "n" .total "forms" (slice "материал" "материала" "материалов")) }}
+      {{- with .emails }} из {{ . }}&nbsp;{{ partial "plural.html" (dict "n" . "forms" (slice "письма" "писем" "писем")) }}{{ end }}
+      {{- with .web }} и {{ . }}&nbsp;{{ partial "plural.html" (dict "n" . "forms" (slice "статьи" "статей" "статей")) }} с сайтов{{ end }}</span>{{ end }}
   </p>
 
   {{- with $d.announce }}<p>{{ . }}</p>{{ end }}
