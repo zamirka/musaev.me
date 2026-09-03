@@ -1,0 +1,92 @@
+{
+ "version": 2,
+ "date": "2026-09-03",
+ "title": "Дайджест за 3 сентября 2026",
+ "announce": "",
+ "stats": {
+  "emails": 6,
+  "web": 7,
+  "total": 13,
+  "full": 0
+ },
+ "top": [
+  "Самое интересное по вашим хабам за 1сентября",
+  "Revolut AIR launches across Europe, but one EU neobank already has better AI numbers 🤖🇪🇺; Grok Bot shopping mak…",
+  "До сбора в базовом лагере AgileDays две недели!",
+  "До старта — 2недели! Не упустите возможность присоединиться к обновленной программе НИУ ВШЭ и Cbondsпо рынку облигаций",
+  "Why Your RAG System Is Only as Good as Its Translator Model"
+ ],
+ "items": [],
+ "short": [
+  {
+   "category": "Прочее",
+   "items": [
+    {
+     "title": "Самое интересное по вашим хабам за 1сентября",
+     "url": "https://habr.com/ea/FaSrXls5EQZfjTH-oUvGog~KVr9ejzED5ktBm9ANwgRXIwFFkLMtAyhv75dUYeJu4YFfn16TKpiaNHjupRYdVRAeuHUAnW0kwNOf7gKKEBEmRugKJnpcfLFrk6kVNW15CH2yIAULkX4ISd7psMkMCnHQ-NY8nvKHmbwrMaPEmZYv75qvvpYyRx16SLrHZwvhkXkePIpzs15jLTCe8dgWj53TA8U-e8NOZyPZaSSRc6mYF8u_3vao9Q_QrNVOcAJHUU",
+     "summary": ""
+    },
+    {
+     "title": "Revolut AIR launches across Europe, but one EU neobank already has better AI numbers 🤖🇪🇺; Grok Bot shopping mak…",
+     "url": "https://substack.com/redirect/2/eyJlIjoiaHR0cHM6Ly9saW5hcy5zdWJzdGFjay5jb20vc3Vic2NyaWJlP3V0bV9zb3VyY2U9ZW1haWwmdXRtX2NhbXBhaWduPWVtYWlsLXN1YnNjcmliZSZyPTM4dzRkOSZuZXh0PWh0dHBzJTNBJTJGJTJGbGluYXMuc3Vic3RhY2suY29tJTJGcCUyRmZpbnRlY2hwdWxzZTExMjEiLCJwIjoyMTM3NDI3NjQsInMiOjgxODE5LCJmIjp0cnVlLCJ1IjoxOTYzMzQxMDksImlhdCI6MTc4ODM0MTQ4MCwiZXhwIjoyMTAzOTE3NDgwLCJpc3MiOiJwdWItMCIsInN1YiI6ImxpbmstcmVkaXJlY3QifQ.urbzoMFSrebgfHU2FQFADpZTfdZy6GmuJEcRlYDOi4A?",
+     "summary": ""
+    },
+    {
+     "title": "До сбора в базовом лагере AgileDays две недели!",
+     "url": "https://s7569255.sendpul.se/sl/MjE0MDczNTU6NzU2OTI1NQ==/f1799c559a8f6335abb4964db243c07f86fc3s6",
+     "summary": ""
+    },
+    {
+     "title": "До старта — 2недели! Не упустите возможность присоединиться к обновленной программе НИУ ВШЭ и Cbondsпо рынку облигаций",
+     "url": "https://cbonds.ru/",
+     "summary": ""
+    },
+    {
+     "title": "Why Your RAG System Is Only as Good as Its Translator Model",
+     "url": "https://substack.com/redirect/2/eyJlIjoiaHR0cHM6Ly9ibG9nLmJ5dGVieXRlZ28uY29tL3N1YnNjcmliZT91dG1fc291cmNlPWVtYWlsJnV0bV9jYW1wYWlnbj1lbWFpbC1zdWJzY3JpYmUmcj0zOHc0ZDkmbmV4dD1odHRwcyUzQSUyRiUyRmJsb2cuYnl0ZWJ5dGVnby5jb20lMkZwJTJGaG93LXRvLXNocmluay1hLWxhbmd1YWdlLW1vZGVsLXdpdGhvdXQiLCJwIjoyMTI3NTExNjQsInMiOjgxNzEzMiwiZiI6dHJ1ZSwidSI6MTk2MzM0MTA5LCJpYXQiOjE3ODgzNjM3NjQsImV4cCI6MjEwMzkzOTc2NCwiaXNzIjoicHViLTAiLCJzdWIiOiJsaW5rLXJlZGlyZWN0In0.pd-e_uio_ZJLz0dyS3vpatp11hGQLPkXOjbiqW9vj-A?",
+     "summary": ""
+    },
+    {
+     "title": "TBM 437: AI and the Recontextualization Tax",
+     "url": "https://substack.com/redirect/2/eyJlIjoiaHR0cHM6Ly9jdXRsZWZpc2guc3Vic3RhY2suY29tL3N1YnNjcmliZT91dG1fc291cmNlPWVtYWlsJnV0bV9jYW1wYWlnbj1lbWFpbC1zdWJzY3JpYmUmcj0zOHc0ZDkmbmV4dD1odHRwcyUzQSUyRiUyRmN1dGxlZmlzaC5zdWJzdGFjay5jb20lMkZwJTJGdGJtLTQzNy1haS1hbmQtdGhlLXJlY29udGV4dHVhbGl6YXRpb24iLCJwIjoyMTM5NDExMjYsInMiOjI0NzExLCJmIjp0cnVlLCJ1IjoxOTYzMzQxMDksImlhdCI6MTc4ODM5NDcxNSwiZXhwIjoyMTAzOTcwNzE1LCJpc3MiOiJwdWItMCIsInN1YiI6ImxpbmstcmVkaXJlY3QifQ.bACsMj8bYfqzUxrdQ6q-o5SnxpbNzRvcJpcK8O-YT1k?",
+     "summary": ""
+    },
+    {
+     "title": "Отчет по результатам ежегодного мониторинга значений страховых тарифов, применяемых при обязательном страховании граждан",
+     "url": "https://www.cbr.ru/Queries/XsltBlock/File/185926/-1/2616#doc-6",
+     "summary": ""
+    },
+    {
+     "title": "Результаты мониторинга максимальных процентных ставок кредитных организаций",
+     "url": "https://www.cbr.ru/Queries/XsltBlock/File/185926/-1/2617#info-1",
+     "summary": ""
+    },
+    {
+     "title": "Анализ собранных «Б.О» ИБ-проектов, стартовавших или завершенных в первом полугодии 2026 года, в целом подтверждает...",
+     "url": "https://bosfera.ru/bo/o-chem-govoryat-proekty",
+     "summary": ""
+    },
+    {
+     "title": "IT-ПРОЕКТЫ 2026 ГОДА В ФИНАНСОВОМ СЕКТОРЕ",
+     "url": "https://bosfera.ru/bo/it-proekty-2026-goda-v-finansovom-sektore",
+     "summary": ""
+    },
+    {
+     "title": "ОФЗ против банковских депозитов",
+     "url": "https://bosfera.ru/bo/ofz-protiv-bankovskih-depozitov",
+     "summary": ""
+    },
+    {
+     "title": "Александр Ведяхин — о том, что с 1 сентября криптовалюта станет легальным инструментом расчетов в ВЭД",
+     "url": "https://bosfera.ru/bo/snova-v-shkolu",
+     "summary": ""
+    },
+    {
+     "title": "Банки против ретейла: новая борьба за кошелек потребителя",
+     "url": "https://bosfera.ru/bo/banki-protiv-reteyla-novaya-borba-za-koshelek-potrebitelya",
+     "summary": ""
+    }
+   ]
+  }
+ ]
+}
