@@ -100,9 +100,9 @@ summaryLength = 30
     noindex = true
 
   [params.analytics]
-    # Заполняется на этапе публикации. Пока пусто – счётчики не рендерятся.
+    # Счётчики рендерятся только в production-сборке (hugo --minify). Пустое значение – счётчик не подключается.
     cloudflareToken = ""
-    metrikaId = ""
+    metrikaId = "112318347"
     umamiUrl = ""
     umamiWebsiteId = ""
 
