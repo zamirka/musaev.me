@@ -27,6 +27,11 @@
   note: Dyna Street Bob FXDB
   group: Мотоцикл
 
+- title: Мотоцикл Yamaha Ténéré 700
+  url: https://ru.wikipedia.org/wiki/Yamaha_T%C3%A9n%C3%A9r%C3%A9_700
+  note: туристический эндуро
+  group: Мотоцикл
+
 - title: Электросамокат Meepo Rover 4×4
   url: https://ali.click/pwgmk1l
   note: внедорожный, полный привод
@@ -47,4 +52,9 @@
 - title: SUP-доска Gladiator PRO 12.6S
   url: https://gladiator.ru/catalog/item/sup-doska-naduvnaya-gladiator-pro-12-6s-novinka-2026
   note: надувная, модель 2026
+  group: Спорт
+
+- title: Велосипед Polygon Siskiu T8 29
+  url: https://www.velostrana.ru/polygon/siskiu-t8-29/
+  note: двухподвес, колёса 29", модель 2026
   group: Спорт
