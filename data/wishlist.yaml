@@ -27,6 +27,11 @@
   note: внедорожный, полный привод
   group: Электротранспорт
 
+- title: Мини-ПК Beelink GTR9 Pro AI Max+ 395
+  url: https://bee-link.ru/gtr9-pro-ai-max-395
+  note: 128 ГБ оперативной памяти, SSD 2 ТБ
+  group: Компьютеры и электроника
+
 - title: Строительный фен FIT, 2000 Вт
   url: https://ozon.ru/t/l1Fbt75
   group: Инструмент и ножи
@@ -47,4 +52,8 @@
 - title: Велосипед Polygon Siskiu T8 29
   url: https://www.velostrana.ru/polygon/siskiu-t8-29/
   note: двухподвес, колёса 29", модель 2026
+  group: Спорт
+
+- title: Подшипники для скейтборда Tech Team Abec-9
+  url: https://www.ozon.ru/product/podshipniki-dlya-skeytborda-tech-team-abec-9-8sht-8-shayb-4-speysera-5709943839/
   group: Спорт
