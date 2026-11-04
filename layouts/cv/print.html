@@ -13,25 +13,39 @@
   {{- $cv := hugo.Data.cv -}}
   {{ partial "cv/header.html" . }}
   <h2>Опыт работы</h2>
-  {{ partial "cv/jobs.html" (dict "jobs" $cv.positions "detail" "full") }}
+  {{ partial "cv/jobs.html" (dict "jobs" (where $cv.positions "pdf_detail" true) "detail" "full") }}
+
+  <section class="cv-early">
+    <h2>Ранний опыт</h2>
+    <ul class="cv-simple cv-history">
+      {{- range where $cv.positions "pdf_detail" "!=" true }}
+      <li>
+        <span class="when">{{ substr .from 0 4 }}–{{ substr .to 0 4 }}</span>
+        <span class="what"><strong>{{ .org }}</strong> · {{ .role }}</span>
+      </li>
+      {{- end }}
+    </ul>
+  </section>
+
   {{ partial "cv/aside.html" . }}
 
-  <h2>Повышение квалификации</h2>
+  {{- $learning := slice }}
+  {{- range where $cv.courses "in_pdf" true }}{{ $learning = $learning | append . }}{{ end }}
+  {{- range where $cv.certifications "in_pdf" true }}{{ $learning = $learning | append . }}{{ end }}
+  {{- with $learning }}
+  <h2>Дополнительное обучение и квалификация</h2>
   <ul class="cv-simple">
-    {{- range $cv.courses }}
+    {{- range sort . "year" "desc" }}
     <li><span class="when">{{ .year }}</span><span class="what"><strong>{{ .title }}</strong><br><span>{{ .org }}</span></span></li>
     {{- end }}
   </ul>
+  {{- end }}
 
-  <h2>Сертификаты и экзамены</h2>
-  <ul class="cv-simple">
-    {{- range $cv.certifications }}
-    <li><span class="when">{{ .year }}</span><span class="what"><strong>{{ .title }}</strong><br><span>{{ .org }}</span></span></li>
-    {{- end }}
-  </ul>
-
-  <h2>О себе</h2>
-  {{ range $cv.about }}<p>{{ . }}</p>{{ end }}
+  <section class="cv-about">
+    <h2>О себе</h2>
+    {{ range $cv.about }}<p>{{ . }}</p>{{ end }}
+  </section>
+  <p class="cv-full-link">Полная история работы и обучения: <a href="{{ "cv/full/" | absURL }}">{{ "cv/full/" | absURL }}</a></p>
 </div>
 </body>
 </html>

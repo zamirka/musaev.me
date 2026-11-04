@@ -430,6 +430,9 @@ figcaption {
 .cv-job-body p { margin-bottom: 0.6rem; }
 .cv-job-body ul { margin-bottom: 0.6rem; }
 .cv-job-body ul li::marker { color: var(--ink-3); }
+.cv-area { margin-top: 1.25rem; }
+.cv-area h4 { margin: 0 0 0.5rem; font-size: 1rem; }
+.cv-area-period { color: var(--ink-2); font-size: 0.85em; font-weight: 400; }
 
 @media (max-width: 38rem) {
   .cv-job { grid-template-columns: 1fr; }

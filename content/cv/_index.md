@@ -1,5 +1,5 @@
 ---
 title: "Резюме"
-description: "Замир Мусаев – Head of Digital Product Development. 22 года в IT: Интерфакс, РБК, Wincor Nixdorf. Резюме, опыт, навыки."
+description: "Замир Мусаев – руководитель разработки и развития цифровых продуктов. В IT с 2004 года: Интерфакс, РБК, Wincor Nixdorf. Резюме, опыт, навыки."
 aliases: ["/resume/", "/hire/"]
 ---

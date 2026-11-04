@@ -2,16 +2,28 @@
   :root { --measure: 100%; }
   @page { size: A4; margin: 14mm 14mm 16mm; }
   html { font-size: 10.5pt; }
-  body { padding: 0; background: #fff; color: #1b1a17; }
+  body { padding: 0; background: #fff; color: #1b1a17; line-height: 1.45; }
   .wrap { max-width: 100%; min-height: 0; display: block; }
   a { color: #1b1a17; text-decoration: none; }
   h1 { font-size: 1.6rem; }
   h2 { font-size: 1.1rem; margin-top: 1.4rem; break-after: avoid; }
-  .cv-job { break-inside: auto; padding: 0.7rem 0; }
-  .cv-job-role, .cv-job-org, .cv-job-body p strong { break-after: avoid; }
-  .cv-job-body ul { break-inside: avoid; }
-  .cv-job-when { font-size: 0.8rem; }
-  .cv-simple li { break-inside: avoid; }
+  .cv-header { margin-bottom: 0.5rem; }
+  .cv-full-link { font-size: 0.85rem; margin-bottom: 1rem; }
+  .cv-job { display: block; break-inside: auto; padding: 0.7rem 0; }
+  .cv-job:not(:has(.cv-area)) { break-inside: avoid; }
+  .cv-job-role, .cv-job-org, .cv-job-body p strong, .cv-area h4 { break-after: avoid; }
+  .cv-list-label { break-after: avoid; }
+  .cv-job-body ul { break-inside: auto; }
+  .cv-job-body li { break-inside: avoid; margin-bottom: 0.25rem; }
+  .cv-job-when { font-size: 0.8rem; padding: 0; margin-bottom: 0.3rem; }
+  .cv-job-when br { display: none; }
+  .cv-duration::before { content: " · "; }
+  .cv-area { margin-top: 0.85rem; }
+  .cv-simple li { break-inside: avoid; padding: 0.35rem 0; }
+  .cv-simple:not(.cv-history) { break-inside: avoid; }
+  .cv-history li { padding: 0.25rem 0; }
+  .cv-about { break-inside: avoid; }
+  .cv-about p { margin-bottom: 0.45rem; }
   .skill-list { break-inside: avoid; }
   p, li { orphans: 3; widows: 3; }
 </style>

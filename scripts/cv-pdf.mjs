@@ -60,6 +60,7 @@ async function main() {
     await page.emulateMedia({ media: 'print', colorScheme: 'light' });
     const res = await page.goto(`http://127.0.0.1:${PORT}/cv/print/`, { waitUntil: 'networkidle' });
     if (!res || !res.ok()) throw new Error(`страница отдала ${res && res.status()}`);
+    await page.evaluate(() => document.fonts.ready);
 
     await mkdir(PUBLIC, { recursive: true });
     await page.pdf({

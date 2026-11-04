@@ -4,7 +4,12 @@
 <section class="cv-job">
   <div class="cv-job-when">{{ partial "cv/period.html" (dict "from" .from "to" .to) }}</div>
   <div class="cv-job-body">
+    {{- if .roles }}
+    <p class="page-meta">Текущие должности по совмещению</p>
+    <h3 class="cv-job-role">{{ range $i, $role := .roles }}{{ if $i }}<br>{{ end }}{{ $role }}{{ end }}</h3>
+    {{- else }}
     <h3 class="cv-job-role">{{ .role }}</h3>
+    {{- end }}
     <p class="cv-job-org">
       {{ .org }}{{ with .project }} · {{ . }}{{ end }}
       {{- with .site }} · <a href="https://{{ . }}" rel="noopener nofollow">{{ . }}</a>{{ end }}
@@ -16,8 +21,21 @@
       {{- with first 1 .body }}{{ range . }}<p>{{ . }}</p>{{ end }}{{ end }}
     {{- end }}
 
+    {{- with .scope }}
+    <p><strong>Масштаб и ответственность:</strong> {{ . }}</p>
+    {{- end }}
+
+    {{- range .areas }}
+    <section class="cv-area">
+      <h4>{{ .name }}{{ with .period }} <span class="cv-area-period">· {{ . }}</span>{{ end }}</h4>
+      {{- range .body }}<p>{{ . }}</p>{{ end }}
+      {{- with .highlights }}<ul>{{ range . }}<li>{{ . }}</li>{{ end }}</ul>{{ end }}
+      {{- with .products }}<p><strong>В составе направления:</strong> {{ delimit . ", " }}.</p>{{ end }}
+    </section>
+    {{- end }}
+
     {{- with .products }}
-    <p><strong>Продукты и проекты:</strong></p>
+    <p class="cv-list-label"><strong>Продукты и проекты:</strong></p>
     <ul>{{ range . }}<li>{{ . }}</li>{{ end }}</ul>
     {{- end }}
 
@@ -26,7 +44,7 @@
     {{- end }}
 
     {{- with .highlights }}
-    <p><strong>Результаты:</strong></p>
+    <p class="cv-list-label"><strong>Результаты:</strong></p>
     <ul>{{ range . }}<li>{{ . }}</li>{{ end }}</ul>
     {{- end }}
   </div>
